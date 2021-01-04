@@ -1,0 +1,18 @@
+body{
+    font-size: 18px;
+    font-family: "Georgia", "Times New Roman", Times, serif;
+    line-height: 27px;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    margin-top: 150px;
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    margin-left: 250px;
+    margin-right: 250px;
+}
