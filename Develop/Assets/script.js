@@ -48,9 +48,14 @@ function renderQuestion(){
     choiceC.innerHTML = q.choiceC;
 }
 
-start.style.display ="none";
-renderQuestion();
-quiz.style.display ="block";
+function startQuiz(){
+    start.style.display ="none";
+    renderQuestion();
+    quiz.style.display ="block";
+    renderProgress();
+    counterRender();
+    Timer =setInterval(counterRender,1000); //1000ms
+}
 
 // render progress
 function renderProgress(){
@@ -68,15 +73,15 @@ function answerISWrong(){
 }
 
 //counter render
-const questionTime = 10; // 10 sec
-const gaugeWidth = 150;
 let count = 0;
-const gaugeProgressUnit =gaugeWidth/questionTime;
+const questionTime = 10; // 10 sec
+const gaugeWidth = 150; // 150px
+const gaugeUnit =gaugeWidth/questionTime;
 
 function counterRender() {
     if(count <= questionTime){
-        counter.innerHTML = count:
-        timeGauge.style.width = count * gaugeProgressUnit;
+        counter.innerHTML = count;
+        timeGauge.style.width = count * gaugeUnit + "px";
         count++;
     } else{
         count =0;
@@ -92,7 +97,7 @@ function counterRender() {
 }
 
 function checkAnswer(answer){
-    if(question[runningQuestionIndex].correct == answer){
+    if(answer == question[runningQuestionIndex].correct ){
       score++;
       answerISCorrect();  
     }else{
@@ -104,24 +109,15 @@ function checkAnswer(answer){
         questionRender();
     }else{
         clearInterval(Timer);
-        scorerender();
+        scoreRender();
     }
 }
 
-start.addEventListener("click",startQuiz);
+start.addEventListener("click","startQuiz");
 
-Let TIMER;
-
-function startQuiz(){
-    start.style.display ="none";
-    counterRender();
-    TIMER = setInterval(counterRender,1000);
-    progressRender();
-    questionRender();
-    quiz.style.display ="block";
+function scoreRender(){
+    scoreDiv.style.display ="block";
+    const scorePercent = Math.rounf(100 * score/question.lenght)
 }
 
-fucntion scoreRender(){
-    ServiceWorkerContainer.style.display ="block";
-    let scorePerCent =Math.round(100 * score/qesutions.length);
-}
+scoreContainer.innerHTML = "<p>"+ scorePerCent"+ "" % </p>"
